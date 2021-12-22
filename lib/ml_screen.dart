@@ -8,6 +8,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:recognise/SQLHelper.dart';
 import 'package:recognise/file_screen.dart';
 
+import 'InputImage.dart';
+
 class MLScanScreen extends StatefulWidget {
   const MLScanScreen({Key? key}) : super(key: key);
 
@@ -42,7 +44,11 @@ class _MLScanScreenState extends State<MLScanScreen> {
         });
       }
       if (Platform.isAndroid) {
-         //here
+        String text = await platform.invokeMethod('doOcr',
+            <String, dynamic>{'imageData': InputImage.fromFilePath(_imageFile!.path).getImageData()});
+        setState(() {
+          txtResult = text;
+        });
       }
     }
 
