@@ -47,7 +47,7 @@ class _MLScanScreenState extends State<MLScanScreen> {
         String text = await platform.invokeMethod('doOcr',
             <String, dynamic>{'imageData': InputImage.fromFilePath(_imageFile!.path).getImageData()});
         setState(() {
-          txtResult = text;
+          txtResult += text + "\n";
         });
       }
     }

@@ -40,6 +40,7 @@ public class MainActivity extends FlutterActivity {
                         if (inputImage == null) return;
                         if(textRecognizer == null)
                             textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
+
                         textRecognizer.process(inputImage)
                                 .addOnSuccessListener(new OnSuccessListener<Text>() {
                                     @Override
