@@ -1,5 +1,4 @@
 import Vision
-import FirebaseCore
 import MLKit
 
 class FlutterChannelManager: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
@@ -27,8 +26,22 @@ class FlutterChannelManager: NSObject, UINavigationControllerDelegate, UIImagePi
                     guard error == nil, let textresult = txtresult else {
                       return
                     }
-                    result(textresult.text)
+                    var resultText = Array<String>()
+                    for block in textresult.blocks {
+                        for line in block.lines {
+                            var lineText = ""
+                            for element in line.elements {
+                               
+                                if (element.frame.origin.x > 130) {
+                                    lineText.append("\(element.text) ")
+                                }
+                            }
+                            resultText.append(lineText)
+                        }
+                    }
+                    result(resultText)
                   }
+                
                 
             }
 //                let image = UIImage(contentsOfFile: path)?.cgImage

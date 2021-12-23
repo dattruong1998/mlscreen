@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:recognise/APIHelper.dart';
-import 'package:recognise/file_screen.dart';
 import 'package:recognise/ml_screen.dart';
 import 'package:recognise/product_data_screen.dart';
 import 'package:recognise/product_model.dart';
-
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +11,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -53,13 +50,13 @@ class _ScanAppState extends State<ScanApp> {
     });
     ProductModel productModel = await getInformation(codeResult);
     if (productModel.id.isNotEmpty) {
-      setState(() {
-        isLoading = false;
-      });
       Navigator.push(context, MaterialPageRoute(builder: (context)=> ProductDataScreen(productModel)));
     } else {
       print("Can not find this id");
     }
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -75,7 +72,6 @@ class _ScanAppState extends State<ScanApp> {
             SizedBox(width: 20),
             Expanded(child: ElevatedButton(child: Text("Recognise Text"),onPressed: () => {
             Navigator.push(context, MaterialPageRoute(builder: (context) => MLScanScreen()))
-
             }), flex: 3)
           ],
         ),

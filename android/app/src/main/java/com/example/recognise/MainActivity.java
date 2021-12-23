@@ -15,6 +15,8 @@ import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
+
+import java.util.ArrayList;
 import java.util.Map;
 
 import io.flutter.embedding.android.FlutterActivity;
@@ -45,7 +47,22 @@ public class MainActivity extends FlutterActivity {
                                 .addOnSuccessListener(new OnSuccessListener<Text>() {
                                     @Override
                                     public void onSuccess(Text text) {
-                                        result.success(text.getText());
+                                        ArrayList<String> arrText = new ArrayList<>();
+                                        for (Text.TextBlock block : text.getTextBlocks()) {
+                                            for (Text.Line line : block.getLines()) {
+                                                String lineText = "";
+                                                for (Text.Element element : line.getElements()) {
+                                                    String elementText = element.getText();
+                                                    Rect elementFrame = element.getBoundingBox();
+                                                    if (elementFrame.left > 130) {
+                                                       lineText += elementText + " ";
+                                                    }
+                                                }
+                                                //return line Text
+                                                arrText.add(lineText);
+                                            }
+                                        }
+                                        result.success(arrText);
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {

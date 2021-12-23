@@ -7,9 +7,9 @@ class FileScreen extends StatefulWidget {
 
 class _FileScreenState extends State<FileScreen> {
   var data = [];
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getData();
   }
@@ -38,8 +38,6 @@ class _FileScreenState extends State<FileScreen> {
                 MaterialPageRoute(builder: (context) => FileDetailsScreen(data[index]["description"])),
               )
             },)
-
-
             : Center(child: CircularProgressIndicator());
       }),
     );

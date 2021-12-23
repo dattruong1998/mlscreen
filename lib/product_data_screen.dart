@@ -16,13 +16,14 @@ class ProductDataScreen extends StatefulWidget {
 class _ProductDataScreenState extends State<ProductDataScreen> {
 
   void saveData () async {
-    int data = await SQLHelper.createItem(widget.productModel.title, widget.productModel.id);
-    print(data);
+    int data = await SQLHelper.createItem(widget.productModel.title, widget.productModel.description);
     if (data > 0) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => FileScreen()),
       );
+    } else {
+      print("can not create item");
     }
   }
 

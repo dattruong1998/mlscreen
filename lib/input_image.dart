@@ -86,13 +86,8 @@ class InputImagePlaneMetadata {
     this.width,
   });
 
-  /// The row stride for this color plane, in bytes.
   final int bytesPerRow;
-
-  /// Height of the pixel buffer on iOS.
   final int? height;
-
-  /// Width of the pixel buffer on iOS.
   final int? width;
 
   Map<String, dynamic> _serialize() => <String, dynamic>{
@@ -119,7 +114,6 @@ extension InputImageFormatMethods on InputImageFormat {
         .map((k, v) => MapEntry(v, k))[rawValue];
   }
 }
-
 
 // The camera rotation angle to be specified
 enum InputImageRotation {
